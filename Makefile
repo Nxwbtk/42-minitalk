@@ -6,34 +6,51 @@
 #    By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/28 00:19:37 by bsirikam          #+#    #+#              #
-#    Updated: 2023/02/28 00:19:38 by bsirikam         ###   ########.fr        #
+#    Updated: 2023/03/04 09:09:05 by bsirikam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
+SERVER_NAME = server
 
-SRC = main.c
+SERVER = server.c minitalk_util.c
+S_OB = $(SERVER:.c=.o)
+OBJS_DIR = obj_server
+OBJC_DIR = obj_client
+S_OBJ := $(addprefix $(OBJS_DIR)/, $(S_OB))
 
-OBJ_C = $(SRC:.c=.o)
-OBJ_DIR = obj
-OBJ := $(addprefix $(OBJ_DIR)/, $(OBJ_C))
+CLIENT_NAME = client
+
+CLIENT = client.c minitalk_util.c
+C_OB = $(CLIENT:.c=.o)
+# OBJ_DIR = obj
+C_OBJ := $(addprefix $(OBJC_DIR)/, $(C_OB))
+
+# OBJ_C = $(SRC:.c=.o)
+# OBJ := $(addprefix $(OBJ_DIR)/, $(OBJ_C))
 CC = gcc
 CFLAGS = #-Wall -Wextra -Werror
-HEADER = pipex.h
+HEADER = minitalk.h
 RM = rm -f
 LIBFT_PATH = libft/
 FT_PRINTF_PATH = ft_printf/
 LIBFT_A = libft/libft.a
 FT_PRINTF_A = ft_printf/libftprintf.a
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
-	@mkdir -p $(OBJ_DIR)
+$(OBJS_DIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all :  $(NAME)
+$(OBJC_DIR)/%.o: %.c $(HEADER)
+	@mkdir -p $(OBJC_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME) : libft ft_printf $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_A) $(FT_PRINTF_A)
+all :  libft ft_printf comp_serv comp_client
+
+comp_serv: $(S_OBJ)
+	@$(CC) $(CFLAGS) -o $(SERVER_NAME) $(S_OBJ) $(LIBFT_A) $(FT_PRINTF_A) 1> /dev/null
+
+comp_client: $(C_OBJ)
+	@$(CC) $(CFLAGS) -o $(CLIENT_NAME) $(C_OBJ) $(LIBFT_A) $(FT_PRINTF_A) 1> /dev/null
 
 libft :
 	@make -C $(LIBFT_PATH) 1> /dev/null
@@ -42,13 +59,12 @@ ft_printf :
 	@make -C $(FT_PRINTF_PATH) 1> /dev/null
 
 norm :
-#@say "Check norm bab mai greng jei kai"
-	@echo "Check norm bab mai greng jei kai" | espeak
 	@norminette -R CheckForbiddenSourceHeader $(LIBFT_PATH)*.c
 	@norminette -R CheckDefine $(LIBFT_PATH)*.h
 	@norminette -R CheckForbiddenSourceHeader $(FT_PRINTF_PATH)*.c
 	@norminette -R CheckDefine $(FT_PRINTF_PATH)*.h
 	@norminette -R CheckForbiddenSourceHeader $(SRC)
+	@norminette -R CheckDefine $(HEADER)
 
 
 clean :
@@ -60,7 +76,8 @@ fclean :
 	@make -C $(LIBFT_PATH) fclean
 	@make -C $(FT_PRINTF_PATH) fclean
 	@rm -rf $(OBJ_DIR)
-	@$(RM) $(NAME)
+	@$(RM) $(SERVER_NAME)
+	@$(RM) $(CLIENT_NAME)
 
 re : fclean all
 .PHONY:libft ft_printf

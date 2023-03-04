@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 00:15:14 by bsirikam          #+#    #+#             */
-/*   Updated: 2023/02/28 21:50:43 by bsirikam         ###   ########.fr       */
+/*   Created: 2023/02/28 00:14:07 by bsirikam          #+#    #+#             */
+/*   Updated: 2023/03/04 08:46:22 by bsirikam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#ifndef MINITALK_H
+# define MINITALK_H
 
-int	main(int argc, char *argv[])
-{
-	ft_printf("Hello World\n");
-	return 0;
-}
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "libft/libft.h"
+# include "ft_printf/ft_printf.h"
+# include <stdio.h>
+# include <sys/types.h>
+# include <signal.h>
+
+void	handle_sigusr1(int sig);
+
+#endif
