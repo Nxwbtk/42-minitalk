@@ -6,7 +6,7 @@
 #    By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/28 00:19:37 by bsirikam          #+#    #+#              #
-#    Updated: 2023/03/05 02:55:15 by bsirikam         ###   ########.fr        #
+#    Updated: 2023/03/05 03:04:02 by bsirikam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ C_OB = $(CLIENT:.c=.o)
 C_OBJ := $(addprefix $(OBJC_DIR)/, $(C_OB))
 
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 HEADER = minitalk.h
 RM = rm -rf
 LIBFT_PATH = libft/

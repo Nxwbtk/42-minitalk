@@ -6,7 +6,7 @@
 /*   By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 02:27:51 by bsirikam          #+#    #+#             */
-/*   Updated: 2023/03/05 02:28:54 by bsirikam         ###   ########.fr       */
+/*   Updated: 2023/03/05 03:02:50 by bsirikam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_decode(int sig)
 		c <<= 1;
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	int	pid;
 
