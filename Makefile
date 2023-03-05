@@ -6,13 +6,13 @@
 #    By: bsirikam <bsirikam@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/28 00:19:37 by bsirikam          #+#    #+#              #
-#    Updated: 2023/03/04 09:09:05 by bsirikam         ###   ########.fr        #
+#    Updated: 2023/03/05 02:55:15 by bsirikam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SERVER_NAME = server
 
-SERVER = server.c minitalk_util.c
+SERVER = server.c
 S_OB = $(SERVER:.c=.o)
 OBJS_DIR = obj_server
 OBJC_DIR = obj_client
@@ -20,17 +20,14 @@ S_OBJ := $(addprefix $(OBJS_DIR)/, $(S_OB))
 
 CLIENT_NAME = client
 
-CLIENT = client.c minitalk_util.c
+CLIENT = client.c
 C_OB = $(CLIENT:.c=.o)
-# OBJ_DIR = obj
 C_OBJ := $(addprefix $(OBJC_DIR)/, $(C_OB))
 
-# OBJ_C = $(SRC:.c=.o)
-# OBJ := $(addprefix $(OBJ_DIR)/, $(OBJ_C))
 CC = gcc
 CFLAGS = #-Wall -Wextra -Werror
 HEADER = minitalk.h
-RM = rm -f
+RM = rm -rf
 LIBFT_PATH = libft/
 FT_PRINTF_PATH = ft_printf/
 LIBFT_A = libft/libft.a
@@ -70,9 +67,10 @@ norm :
 clean :
 	@make -C $(LIBFT_PATH) clean
 	@make -C $(FT_PRINTF_PATH) clean
-	@$(RM) $(OBJ)
+	@rm -rf $(OBJC_DIR)
+	@rm -rf $(OBJS_DIR)
 
-fclean :
+fclean : clean
 	@make -C $(LIBFT_PATH) fclean
 	@make -C $(FT_PRINTF_PATH) fclean
 	@rm -rf $(OBJ_DIR)
